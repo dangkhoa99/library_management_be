@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
+const routes = require('./routes')
 const db = require('./configs/dbConnection')
 
 const app = express()
@@ -11,6 +12,8 @@ db.connect()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
+
+routes(app)
 
 app.listen(port, () =>
   console.log(`Server running at http://localhost:${port}`),
