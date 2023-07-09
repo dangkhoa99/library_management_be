@@ -77,7 +77,11 @@ const CategoryController = {
         { new: true },
       )
 
-      return res.status(200).json({ id: req.params.id })
+      res.status(200).json({
+        message: `Delete success category with id: ${req.params.id}`,
+        status: Statuses.SUCCESS,
+        code: 200,
+      })
     } catch (error) {
       res
         .status(500)
