@@ -81,9 +81,9 @@ const authController = {
     if (account && (await bcrypt.compare(password, account.password))) {
       const user = await User.findOne({ _id: account.user })
 
-      if (!user) {
+      if (!user || user.isDeleted) {
         return res.status(404).json({
-          message: 'Cannot find user in database',
+          message: 'User not found',
           status: Statuses.ERROR,
           code: 404,
         })
