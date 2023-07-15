@@ -12,7 +12,7 @@ const UserController = {
   list: async (req, res) => {
     const { role } = req.user
 
-    if (role !== Roles.ADMIN || role !== Roles.SUPER_ADMIN) {
+    if (role !== Roles.ADMIN && role !== Roles.SUPER_ADMIN) {
       return res
         .status(403)
         .json({ message: 'Forbidden', status: Statuses.ERROR, code: 403 })
@@ -36,7 +36,7 @@ const UserController = {
   listLibrarian: async (req, res) => {
     const { role } = req.user
 
-    if (role !== Roles.ADMIN || role !== Roles.SUPER_ADMIN) {
+    if (role !== Roles.ADMIN && role !== Roles.SUPER_ADMIN) {
       return res
         .status(403)
         .json({ message: 'Forbidden', status: Statuses.ERROR, code: 403 })
@@ -61,8 +61,8 @@ const UserController = {
     const { role } = req.user
 
     if (
-      role !== Roles.ADMIN ||
-      role !== Roles.SUPER_ADMIN ||
+      role !== Roles.ADMIN &&
+      role !== Roles.SUPER_ADMIN &&
       role !== Roles.MANAGER
     ) {
       return res
@@ -89,8 +89,8 @@ const UserController = {
     const { role } = req.user
 
     if (
-      role !== Roles.ADMIN ||
-      role !== Roles.SUPER_ADMIN ||
+      role !== Roles.ADMIN &&
+      role !== Roles.SUPER_ADMIN &&
       role !== Roles.MANAGER
     ) {
       return res
@@ -190,7 +190,7 @@ const UserController = {
   createLibrarian: async (req, res) => {
     const { role } = req.user
 
-    if (role !== Roles.ADMIN || role !== Roles.SUPER_ADMIN) {
+    if (role !== Roles.ADMIN && role !== Roles.SUPER_ADMIN) {
       return res
         .status(403)
         .json({ message: 'Forbidden', status: Statuses.ERROR, code: 403 })
@@ -256,8 +256,8 @@ const UserController = {
     const { role } = req.user
 
     if (
-      role !== Roles.ADMIN ||
-      role !== Roles.SUPER_ADMIN ||
+      role !== Roles.ADMIN &&
+      role !== Roles.SUPER_ADMIN &&
       role !== Roles.MANAGER
     ) {
       return res
@@ -304,8 +304,8 @@ const UserController = {
     const { role } = req.user
 
     if (
-      role !== Roles.ADMIN ||
-      role !== Roles.SUPER_ADMIN ||
+      role !== Roles.ADMIN &&
+      role !== Roles.SUPER_ADMIN &&
       role !== Roles.MANAGER
     ) {
       return res
