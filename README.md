@@ -5,7 +5,7 @@
 - **Start the server**
 
   1. ```bash
-     npm install
+     npm i
      ```
   2. ```bash
      npm start

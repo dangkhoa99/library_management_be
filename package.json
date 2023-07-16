@@ -10,7 +10,7 @@
 		"prettier:write": "prettier --write .",
 		"format": "npm run prettier:write"
 	},
-	"author": "",
+	"author": "dangkhoa99",
 	"license": "ISC",
 	"dependencies": {
 		"bcrypt": "^5.0.1",
