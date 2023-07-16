@@ -45,6 +45,7 @@ const UserController = {
     try {
       const users = await User.find({ isDeleted: false, role: Roles.MANAGER })
         .sort({ createdAt: 'desc' })
+        .populate({ path: 'account', select: ['_id', 'username'] })
         .select('-isDeleted')
 
       res.status(200).json(users)
@@ -116,6 +117,9 @@ const UserController = {
   show: async (req, res) => {
     try {
       const user = await User.findById(req.params.id)
+        .populate({ path: 'account', select: ['_id', 'username'] })
+        .select('-isDeleted')
+
       res.status(200).json(user)
     } catch (error) {
       res
@@ -233,15 +237,17 @@ const UserController = {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     try {
-      const user = await User.create({ ...other })
+      const newUser = await User.create({ ...other, role: Roles.MANAGER })
 
-      await Account.create({
+      const newAccount = await Account.create({
         username,
         password: hashedPassword,
-        user: user.id,
+        user: newUser.id,
       })
 
-      res.status(201).json(user)
+      await User.findByIdAndUpdate(newUser.id, { account: newAccount.id })
+
+      res.status(201).json(newUser)
     } catch (error) {
       res
         .status(500)
