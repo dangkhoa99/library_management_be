@@ -500,14 +500,17 @@ const UserController = {
     const { id } = req.user
 
     try {
-      const user = await User.findById(id).select('+password')
+      const account = await Account.findOne({ user: id }).select('+password')
 
       // compare password with hashedPassword
-      if (user && (await bcrypt.compare(currentPassword, user.password))) {
+      if (
+        account &&
+        (await bcrypt.compare(currentPassword, account.password))
+      ) {
         const hashedPassword = await bcrypt.hash(newPassword, 10)
 
-        user.password = hashedPassword
-        user.save()
+        account.password = hashedPassword
+        account.save()
 
         res.status(200).json({
           message: 'Change password success',
