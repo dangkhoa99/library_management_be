@@ -47,6 +47,8 @@ const authController = {
       user: newUser.id,
     })
 
+    await User.findByIdAndUpdate(newUser.id, { account: newAccount.id })
+
     if (newAccount) {
       return res.status(201).json({
         id: newAccount.id,
