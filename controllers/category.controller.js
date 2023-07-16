@@ -20,7 +20,9 @@ const CategoryController = {
   // GET /categories/:id
   show: async (req, res) => {
     try {
-      const category = await Category.findById(req.params.id)
+      const category = await Category.findById(req.params.id).select(
+        '-isDeleted',
+      )
       res.status(200).json(category)
     } catch (error) {
       res

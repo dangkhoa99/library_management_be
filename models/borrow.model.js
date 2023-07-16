@@ -15,6 +15,7 @@ const borrowSchema = new Schema(
     borrowDate: { type: Date, required: true },
     returnDate: { type: Date, required: true },
     status: { type: String, required: true, default: Statuses.PENDING },
+    note: { type: String },
     isDeleted: { type: Boolean, default: false },
   },
   { timestamps: true },

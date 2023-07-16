@@ -52,6 +52,7 @@ const BorrowController = {
         .populate({ path: 'customer', select: ['_id', 'name'] })
         .populate({ path: 'librarian', select: ['_id', 'name', 'role'] })
         .populate({ path: 'books.book', select: ['name'] })
+        .select('-isDeleted')
 
       res.status(200).json(borrow)
     } catch (error) {

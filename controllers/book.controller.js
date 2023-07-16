@@ -25,6 +25,8 @@ const BookController = {
       const book = await Book.findById(req.params.id)
         .populate({ path: 'category', select: ['_id', 'name'] })
         .populate({ path: 'author', select: ['_id', 'name'] })
+        .populate({ path: 'image', select: ['link'] })
+        .select('-isDeleted')
 
       res.status(200).json(book)
     } catch (error) {

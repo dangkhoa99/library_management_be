@@ -10,6 +10,7 @@ const bookSchema = new Schema(
     quantity: { type: Number, default: 1 },
     publisher: { type: String },
     publishDate: { type: Date },
+    image: { type: Schema.Types.ObjectId, ref: 'Image' },
     isDeleted: { type: Boolean, default: false },
   },
   { timestamps: true },
