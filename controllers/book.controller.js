@@ -8,7 +8,7 @@ const BookController = {
     try {
       const books = await Book.find({ isDeleted: false })
         .populate({ path: 'category', select: ['_id', 'name'] })
-        .populate({ path: 'user', select: ['_id', 'name'] })
+        .populate({ path: 'author', select: ['_id', 'name'] })
         .sort({ createdAt: 'desc' })
         .select('-isDeleted')
       res.status(200).json(books)
@@ -24,7 +24,7 @@ const BookController = {
     try {
       const book = await Book.findById(req.params.id)
         .populate({ path: 'category', select: ['_id', 'name'] })
-        .populate({ path: 'user', select: ['_id', 'name'] })
+        .populate({ path: 'author', select: ['_id', 'name'] })
 
       res.status(200).json(book)
     } catch (error) {
