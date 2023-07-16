@@ -9,6 +9,7 @@ const BookController = {
       const books = await Book.find({ isDeleted: false })
         .populate({ path: 'category', select: ['_id', 'name'] })
         .populate({ path: 'author', select: ['_id', 'name'] })
+        .populate({ path: 'image', select: ['_id', 'link'] })
         .sort({ createdAt: 'desc' })
         .select('-isDeleted')
       res.status(200).json(books)
