@@ -130,15 +130,14 @@ const BorrowController = {
     }
   },
 
-  // NOT DONE
   // PATCH /borrows/:id/changeStatus
   editStatus: async (req, res) => {
     Borrow.findById(req.params.id)
       .then((o) => {
         o.status = req.body.status
 
-        // Statues = CANCELED => return quantity in Book
-        if (req.body.status === Statuses.CANCELLED) {
+        // Statues = RETURNED => return quantity in Book
+        if (req.body.status === Statuses.RETURNED) {
           const books = o.books
 
           books.forEach(({ book: bookId, quantity }) => {

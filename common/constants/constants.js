@@ -9,6 +9,10 @@ const Statuses = {
   CANCELLED: 'CANCELLED',
   APPROVED: 'APPROVED',
   COMPLETED: 'COMPLETED',
+  // Borrow Ticket
+  CHECKED_OUT: 'CHECKED_OUT',
+  OVERDUE: 'OVERDUE',
+  RETURNED: 'RETURNED',
 }
 
 const Roles = {
