@@ -51,7 +51,15 @@ const BorrowController = {
       const borrow = await Borrow.findById(req.params.id)
         .populate({ path: 'customer', select: ['_id', 'name'] })
         .populate({ path: 'librarian', select: ['_id', 'name', 'role'] })
-        .populate({ path: 'books.book', select: ['name'] })
+        .populate({
+          path: 'books.book',
+          select: ['_id', 'name'],
+          populate: [
+            { path: 'author', select: ['_id', 'name'] },
+            { path: 'category', select: ['_id', 'name'] },
+            { path: 'image', select: ['_id', 'link'] },
+          ],
+        })
         .select('-isDeleted')
 
       res.status(200).json(borrow)
