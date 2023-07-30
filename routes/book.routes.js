@@ -6,6 +6,7 @@ const verifyToken = require('../middleware/verifyToken.middleware')
 router.use(verifyToken)
 
 router.get('/', Book.list)
+router.get('/count', Book.listCount)
 router.get('/:id', Book.show)
 router.post('/', Book.create)
 router.patch('/:id', Book.edit)

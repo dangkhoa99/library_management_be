@@ -17,6 +17,20 @@ const CategoryController = {
     }
   },
 
+  // GET /categories/count
+  listCount: async (req, res) => {
+    try {
+      const categories = await Category.find({ isDeleted: false })
+      const count = categories.length
+
+      res.status(200).json({ count })
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message, status: Statuses.ERROR, code: 500 })
+    }
+  },
+
   // GET /categories/:id
   show: async (req, res) => {
     try {

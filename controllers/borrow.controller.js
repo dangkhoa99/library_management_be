@@ -34,7 +34,7 @@ const BorrowController = {
     }
 
     try {
-      const borrows = await Borrow.find({ status: status })
+      const borrows = await Borrow.find({ isDeleted: false, status: status })
       const count = borrows.length
 
       res.status(200).json({ count })

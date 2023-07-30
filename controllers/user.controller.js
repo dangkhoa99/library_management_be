@@ -84,6 +84,32 @@ const UserController = {
     }
   },
 
+  // GET /users/customers/count
+  listCustomerCount: async (req, res) => {
+    const { role } = req.user
+
+    if (
+      role !== Roles.ADMIN &&
+      role !== Roles.SUPER_ADMIN &&
+      role !== Roles.MANAGER
+    ) {
+      return res
+        .status(403)
+        .json({ message: 'Forbidden', status: Statuses.ERROR, code: 403 })
+    }
+
+    try {
+      const users = await User.find({ isDeleted: false, role: Roles.USER })
+      const count = users.length
+
+      res.status(200).json({ count })
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message, status: Statuses.ERROR, code: 500 })
+    }
+  },
+
   // GET /users/authors
   // role: superAdmin/admin/librarian
   listAuthor: async (req, res) => {
@@ -105,6 +131,32 @@ const UserController = {
         .select('-isDeleted')
 
       res.status(200).json(users)
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message, status: Statuses.ERROR, code: 500 })
+    }
+  },
+
+  // GET /users/authors/count
+  listAuthorCount: async (req, res) => {
+    const { role } = req.user
+
+    if (
+      role !== Roles.ADMIN &&
+      role !== Roles.SUPER_ADMIN &&
+      role !== Roles.MANAGER
+    ) {
+      return res
+        .status(403)
+        .json({ message: 'Forbidden', status: Statuses.ERROR, code: 403 })
+    }
+
+    try {
+      const users = await User.find({ isDeleted: false, role: Roles.AUTHOR })
+      const count = users.length
+
+      res.status(200).json({ count })
     } catch (error) {
       res
         .status(500)

@@ -20,6 +20,20 @@ const BookController = {
     }
   },
 
+  // GET /books/count
+  listCount: async (req, res) => {
+    try {
+      const books = await Book.find({ isDeleted: false })
+      const count = books.length
+
+      res.status(200).json({ count })
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: error.message, status: Statuses.ERROR, code: 500 })
+    }
+  },
+
   // GET /books/:id
   show: async (req, res) => {
     try {

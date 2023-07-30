@@ -7,7 +7,9 @@ router.use(verifyToken)
 
 router.get('/', User.list)
 router.get('/authors', User.listAuthor)
+router.get('/authors/count', User.listAuthorCount)
 router.get('/customers', User.listCustomer)
+router.get('/customers/count', User.listCustomerCount)
 router.get('/librarians', User.listLibrarian)
 router.get('/:id', User.show)
 
